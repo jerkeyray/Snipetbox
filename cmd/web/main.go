@@ -7,11 +7,13 @@ import (
 	"net/http"
 	"os"
 	_ "github.com/go-sql-driver/mysql"
+	"snipetbox.jerkeyray.com/internal/models"
 )
 
 type application struct {
 	errorLog *log.Logger
 	infoLog *log.Logger
+	snippets *models.SnippetModel
 }
 
 
@@ -36,6 +38,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog: infoLog,
+		snippets: &models.SnippetModel{DB: db},
 	}
 
 	mux := http.NewServeMux()
